@@ -1,0 +1,21 @@
+function downloadandunzip {
+
+[CmdletBinding()]
+param (
+    [parameter(Position=0,Mandatory=$True)]
+    [string]$urltofile,
+    [parameter(Position=1,Mandatory=$True)]
+    [string]$filepath,
+    [parameter(Position=2,Mandatory=$True)]
+    [string]$filenamea,
+    [parameter(Position=3,Mandatory=$True)]
+    [string]$waittime
+)
+
+    $outpath = $filepath+"\"+$filenamea"
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    Invoke-WebRequest -Uri $urltofile -OutFile $outpath
+
+    Start-Sleep -seconds $waittime
+    Expand-Archive $outpath -DestinationPath $filepath
+}
